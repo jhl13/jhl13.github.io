@@ -1,0 +1,491 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>RNN | luo_13的博客</title>
+<meta name="description" content="vanilla RNN">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="luo_13的博客">
+<meta property="og:title" content="RNN">
+<meta property="og:url" content="http://localhost:4000/RNN/">
+
+
+  <meta property="og:description" content="vanilla RNN">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2018-09-15T00:00:00+08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/RNN/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "luo",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="luo_13的博客 Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">luo_13的博客</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/" >Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">切换菜单</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/chen.jpeg" alt="luo_13" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">luo_13</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        stupid guy
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">关注</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">CN-GZ</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/jhl13"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+          
+        
+          
+            <li><a href="jiehaoluo13@gmail.com"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> jiehaoluo@gmail.com</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="RNN">
+    <meta itemprop="description" content="vanilla RNN">
+    <meta itemprop="datePublished" content="September 15, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">RNN
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  2 分钟读完
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="vanilla-rnn">vanilla RNN</h1>
+
+<hr />
+
+<p>RNN最大的特点在于同一隐藏层的各单元按照序列链接。</p>
+
+<p><img src="../assets/images/RNN/1.png" alt="RNN" /></p>
+
+<p>通过这个图可以知道，RNN比CNN更适合处理具有一定序列的输入，因为RNN的结构决定了前面的输入必然能影响到后面的输出。这使得RNN在NLP这一领域获得了很大的成功。</p>
+
+<p>在学习RNN的过程过程中反向传播公式的推导应该是比较难的一个部分，因为像是CNN的反向传播只有一个方向，就是上一层传递给下一层，而RNN除了沿上下层的传播还有沿时间序列方向的传播。</p>
+
+<p>最终推导结果：<br />
+c为隐藏层到输出的bias，b为输入到隐藏层的bais，推导过程比较长，以下这篇文章写得比较清晰<a href="https://zybuluo.com/hanbingtao/note/541458">循环神经网络</a>以及<a href="http://www.deeplearningbook.org/contents/rnn.html">deeplearningbook</a>写得比较清晰</p>
+
+<p><img src="../assets/images/RNN/2.png" alt="RNN gradient" /></p>
+
+<p>在编程过程中发现了一个比较容易出错的地方，那就是反向传播过程要注意残差在上下层之间传递，因为参考内容的推导过程主要是以一个隐藏层作为例子，所以写代码的过程要注意这一点，如下图，残差3要往4和5的方向传递，但要注意的是，残差3是有1,2两个方向的残差累加而成的。</p>
+
+<p><img src="../assets/images/RNN/3.png" alt="RNN flow" /></p>
+
+<p>另一个需要注意的地方是，在某些任务（不是全部）中RNN的训练和测试是很不一样的，这里举的例子是cs231n的image captioning 问题。</p>
+
+<p>训练时因为知道正确的label，所以可以将ground-truth直接当成input输入到RNN当中，但是训练的时候，因为不知道ground-truth，所以要将前一个输出要当成后一个的输入。<br />
+拿上面的图为例就是用x(t – 1)预测出o(t-1),然后将o(t-1)当成x(t)再次输入到网络。</p>
+
+<p>采用这种方式是因为cs231n的assignment3将图像的特征当成input输入到网络时只会预测出结果中的第一个词。<br />
+采用的结构感觉是在one to many上做了一些变动。</p>
+
+<p><img src="../assets/images/RNN/4.png" alt="RNN flow" /></p>
+
+<h2 id="vanilla-rnn的缺点">Vanilla RNN的缺点</h2>
+<p>训练过程中容易发生梯度爆炸或梯度消失，产生的原因在参考资料<a href="https://zybuluo.com/hanbingtao/note/541458">循环神经网络</a>中有详细说明。</p>
+
+<p>梯度爆炸可以简单用阈值方式解决。<br />
+而解决梯度消失也有挺多的方式，参考资料<a href="https://zybuluo.com/hanbingtao/note/541458">循环神经网络</a>中提到了三种常见的方式，我觉得进行batch normalization也应该可以缓解这种现象。</p>
+
+<p><img src="../assets/images/RNN/5.png" alt="RNN flow" /></p>
+
+<h1 id="lstm">LSTM</h1>
+
+<hr />
+
+<p>如sigmoid函数，如果输入的模过大就会出现梯度消失的情况，LSTM为了解决这一问题加入了门和单元状态的概念，可以有效的控制前面输入对后面输出的影响。</p>
+
+<p><img src="../assets/images/RNN/6.png" alt="RNN flow" /></p>
+
+<p>LSTM添加了三个门，遗忘门（forget gate）用以决定上一时刻的单元状态有多少能保留下来，输入门（input gate）用来决定输入状态有多少能进入到单元状态，输出门（output gate）用来决定单元状态有多少能输出到output</p>
+
+<p><img src="../assets/images/RNN/7.png" alt="RNN flow" /></p>
+
+<p>c为单元状态（相当于一个容器），从左往右的三个X分别为遗忘门，输入门和输出门。<br />
+反向传播公式的推导在参考资料<a href="http://www.deeplearningbook.org/contents/rnn.html">deeplearningbook</a>和<a href="https://zybuluo.com/hanbingtao/note/581764">LSTM</a>中有很详细的过程</p>
+
+<figure class="third">
+    <img src="../assets/images/RNN/8-1.png" />
+    <img src="../assets/images/RNN/8-2.png" />
+    <img src="../assets/images/RNN/8-3.png" />
+</figure>
+
+<p>状态单元c并不直接输出，在反向传播计算残差的时候要格外注意这一点。</p>
+
+<p>LSTM还有很多不同的变体，比如说GRU，GRU网上资料说是LSTM最为成功的一种变体，在后面的学习中会详细的去了解。</p>
+
+<p>一些想法<br />
+RNN比较适合处理时序问题，之前还看过一篇博客，内容主要是在介绍RNN能做一些什么事情，里面比较有趣的是让电脑学会从左往右去看一张图片。</p>
+
+<p><img src="../assets/images/RNN/9.gif" alt="RNN flow" /></p>
+
+<h1 id="ocr">OCR</h1>
+
+<hr />
+
+<p>对于text recognition有两种比较常见的方法<br />
+非端到端的OCR：需要进行预分割，特征提取，语义分析等环节，各环节之间存在一定关系<br />
+端到端OCR：无需进行预分割，且整个过程是一个整体</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 更新时间:</strong> <time datetime="2018-09-15T00:00:00+08:00">September 15, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">分享</h4>
+  
+
+  <!--<a href="https://twitter.com/intent/tweet?text=Rnn%20http%3A%2F%2Flocalhost%3A4000%2FRNN%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="分享 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>-->
+
+  <!--<a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FRNN%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="分享 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>-->
+
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2FRNN%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="分享 Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <!--<a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2FRNN%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="分享 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>-->
+</section>
+
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">猜您还喜欢</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/RNN/" rel="permalink">RNN
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  2 分钟读完
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">vanilla RNN
+
+</p>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+</div>
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>关注:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/jhl13"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 luo. 技术来自于 <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>
