@@ -23,7 +23,7 @@ description              : "别看了，没啥好看的。"
 url                      : "https://jhl13.github.io"  # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
-teaser                   : "/assets/images/title.jpeg" # path of fallback teaser image, e.g. "/assets/images/500x300.png"
+teaser                   : #"/assets/images/title.jpeg" # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
@@ -107,9 +107,6 @@ author:
   location         : "CN-GZ"
   #email            : "jiehaoluo13@gmail.com"
   links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "jiehaoluo13@gmail.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
@@ -125,6 +122,9 @@ author:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
+    - label: "jiehaoluo@gmail.com"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "jiehaoluo13@gmail.com"
 
 # Site Footer
 footer:
