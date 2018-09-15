@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-09-15T12:18:43+08:00</updated><id>http://localhost:4000/</id><title type="html">luo_13的博客</title><subtitle>别看了，没啥好看的。</subtitle><author><name>luo_13</name></author><entry><title type="html">Rnn</title><link href="http://localhost:4000/RNN/" rel="alternate" type="text/html" title="Rnn" /><published>2018-09-15T00:00:00+08:00</published><updated>2018-09-15T00:00:00+08:00</updated><id>http://localhost:4000/RNN</id><content type="html" xml:base="http://localhost:4000/RNN/">&lt;h1 id=&quot;vanilla-rnn&quot;&gt;vanilla RNN&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-09-16T01:11:06+08:00</updated><id>http://localhost:4000/</id><title type="html">luo_13的博客</title><subtitle>别看了，没啥好看的。</subtitle><author><name>luo_13</name></author><entry><title type="html">简介-RNN</title><link href="http://localhost:4000/%E7%AE%80%E4%BB%8B-RNN/" rel="alternate" type="text/html" title="简介-RNN" /><published>2018-09-15T00:00:00+08:00</published><updated>2018-09-15T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AE%80%E4%BB%8B-RNN</id><content type="html" xml:base="http://localhost:4000/%E7%AE%80%E4%BB%8B-RNN/">&lt;h1 id=&quot;vanilla-rnn&quot;&gt;vanilla RNN&lt;/h1&gt;
 
 &lt;hr /&gt;
 
@@ -73,4 +73,152 @@ RNN比较适合处理时序问题，之前还看过一篇博客，内容主要�
 
 &lt;p&gt;对于text recognition有两种比较常见的方法&lt;br /&gt;
 非端到端的OCR：需要进行预分割，特征提取，语义分析等环节，各环节之间存在一定关系&lt;br /&gt;
-端到端OCR：无需进行预分割，且整个过程是一个整体&lt;/p&gt;</content><author><name>luo_13</name></author><summary type="html">vanilla RNN</summary></entry></feed>
+端到端OCR：无需进行预分割，且整个过程是一个整体&lt;/p&gt;</content><author><name>luo_13</name></author><summary type="html">主要介绍vanilla RNN与LSTM</summary></entry><entry><title type="html">简介-CTC</title><link href="http://localhost:4000/%E7%AE%80%E4%BB%8B-CTC/" rel="alternate" type="text/html" title="简介-CTC" /><published>2018-09-15T00:00:00+08:00</published><updated>2018-09-15T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AE%80%E4%BB%8B-CTC</id><content type="html" xml:base="http://localhost:4000/%E7%AE%80%E4%BB%8B-CTC/">&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
+&lt;/script&gt;
+
+&lt;h1 id=&quot;ctc&quot;&gt;CTC&lt;/h1&gt;
+
+&lt;p&gt;CTC (Connectionist Temporal Classification) 是针对时间分类任务所设计出来的，利用它可以实现端到端的文本识别，在一定程度上解决了文本识别中的分割问题。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;通过上面的图片可以对CTC的工作有一个比较直观的理解。它不需要输入输出在每一个时刻都对齐，只要求最后的输出跟目标输出一致。&lt;/p&gt;
+
+&lt;p&gt;CTC与别的算法主要区别在于，他要求输出序列不短于目标序列，且引入了Blank状态。&lt;/p&gt;
+
+&lt;p&gt;如：&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;F(a-ab-)=F(-aa--abb)=aab&lt;/script&gt;
+
+&lt;p&gt;CTC主要在做的东西是预测每一个时刻的输出，然后合并相邻的重复输出，再移去blank状态。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这里，两个L之间blank状态有着很关键的作用，它可以分隔开来两个相同的输出，避免了得到helo的结果。&lt;/p&gt;
+
+&lt;p&gt;从上图可以看出，CTC对输出序列有两个要求，第一个是输入序列要不短于label长度;第二个是为了能区分开两个相同字母相邻的情况，需要对label做一下处理，通常的操作是在label中每个元素的前后加上blank状态，这样做会使label长度由U变成2U+1。&lt;/p&gt;
+
+&lt;p&gt;如:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;Z=[ε,y1,εy2,...,ε,yu,ε]&lt;/script&gt;
+
+&lt;h1 id=&quot;loss-function&quot;&gt;LOSS function&lt;/h1&gt;
+
+&lt;p&gt;计算前向通道的时候，我们可以采用合并相同路线的方式去简化计算，也就是说每一个节点的概率只计算一次，这样可以减少很多计算量。这类似于HMM的forward-backword Algorithm。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/3.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;计算前向通道的时候有一个值得注意的地方，那就是节点链接的合理性&lt;br /&gt;
+比如说label集合是[ε1 a ε2 p ε3 p ε4 l ε5 e ε6],ε是blank，为了方便区分加了下  标，假设一个输出序列是正确的话&lt;br /&gt;
+如果t时刻预测结果是e，则t-1的预测则一定是[l ε5 e]之间的一个;&lt;br /&gt;
+如果 t时刻预测结果是ε6，则t-1的预测则一定是[e ε6]之间的一个;&lt;br /&gt;
+如果 t时刻预测结果是p，则t-1的预测则一定是[ε3 p]之间的一个;&lt;br /&gt;
+且一条正确的路径只能由[ε1 a]开始，以[e ε6]结束。&lt;/p&gt;
+
+&lt;p&gt;所以前后节点的链接方式如下&lt;/p&gt;
+
+&lt;center class=&quot;half&quot;&gt;
+    &lt;img src=&quot;../assets/images/CTC/4.png&quot; /&gt;  &lt;img src=&quot;../assets/images/CTC/5.png&quot; /&gt;
+&lt;/center&gt;
+
+&lt;p&gt;下图是一个有效路径的示意图&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/6.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;所以前后向算法在 &lt;br /&gt;
+前向推导：&lt;br /&gt;
+(1)初始化:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/7.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;(2)递推关系：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/8.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/9.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;因为时间关系，有些路径不能到达终点 U‘-u-1 &amp;gt; 2(T-t)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/10.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;同理后向推导：&lt;br /&gt;
+(1)初始化:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/11.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;(2)递推关系：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/12.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/13.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;CTC loss function使用的是最大似然&lt;/p&gt;
+
+&lt;p&gt;取log之后&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/14.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;由前后向算法可得&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/15.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;所以&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/16.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;需要注意的是为了log计算中的underflow问题，可以对log运算进行转化&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/17.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;gradient&quot;&gt;Gradient&lt;/h1&gt;
+
+&lt;p&gt;这里主要参考了&lt;a href=&quot;https://www.cs.toronto.edu/~graves/preprint.pdf&quot;&gt;Supervised Sequence Labelling with Recurrent
+Neural Networks的第七章第四小节&lt;/a&gt;和&lt;a href=&quot;https://blog.csdn.net/xmdxcsj/article/details/51763886&quot;&gt;CTC学习笔记&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;其中第一份参考资料的式（7.32）应该是错了，多了一个负号。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/18.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/19.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/20.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;计算梯度的过程中，需要注意一点是，如果被求偏导的节点不在当前求偏导的路径上，那么他的倒数为0&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/CTC/21.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在学习CTC的时候，主要是在理解前后向算法，以及推导梯度公式。&lt;br /&gt;
+因为它的代码实现比较困难，所以我没有直接运用上述内容进行编程练习，用的只是tensorflow的API，后面有时间的会找一些别人的实现看看，然后再试着自己去实现。&lt;/p&gt;
+
+&lt;h1 id=&quot;cnn_lstm_ctc_hdr&quot;&gt;cnn_lstm_ctc_HDR&lt;/h1&gt;
+
+&lt;p&gt;上星期另一个主要的任务是写了一个手写数字的识别。因为是第一次完全自己写，遇到的问题比较多，花了比较多的时间。&lt;/p&gt;
+
+&lt;p&gt;目前还没有完成，我觉得还欠缺两个比较重要的东西。&lt;br /&gt;
+一个是评判机制，因为label是不定长的，而且感觉不能以单纯对错来评估结果，比如说正确的是[1234],预测是[2234],所以还在找一个比较合理的准确率计算方式。&lt;br /&gt;
+另一个是因为CTC出来的是一个概率，需要进行解码才能得出直观的结果，目前这一步还没有完成&lt;/p&gt;
+
+&lt;p&gt;另外现在的网络存在过拟合问题，应该是数据集太小的缘故。&lt;/p&gt;
+
+&lt;p&gt;采用的网络结构是cnn+lstm+ctc&lt;br /&gt;
+cnn使用了三层卷积网络和两层全链接层，提取出特征作为lstm的输入。&lt;/p&gt;
+
+&lt;p&gt;使用的数据集参考了&lt;br /&gt;
+https://arxiv.org/pdf/1710.03112.pdf&lt;br /&gt;
+目前只使用了cvl-strings，里面只有1262张图片。&lt;/p&gt;
+
+&lt;p&gt;编程过程中需要注意的的地方有&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;label数目要计算上blank，即在原来classnum基础上 + 1&lt;/li&gt;
+  &lt;li&gt;注意数据的格式，要符合tensorflow的要求&lt;/li&gt;
+  &lt;li&gt;因为label不定长，需要将其转换成稀疏矩阵&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这是代码的&lt;a href=&quot;https://github.com/jhl13/cnn_lstm_ctc_HDR/blob/master/rnn.ipynb&quot;&gt;github仓库&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;参考资料：&lt;br /&gt;
+http://ilovin.me/2017-04-23/tensorflow-lstm-ctc-input-output/&lt;br /&gt;
+http://ilovin.me/2017-04-06/tensorflow-lstm-ctc-ocr/&lt;br /&gt;
+https://github.com/xiaofengShi/CTC_TF/blob/padding_warpctc/lib/networks/network.py&lt;br /&gt;
+https://github.com/jimmyleaf/ocr_tensorflow_cnn&lt;/p&gt;</content><author><name>luo_13</name></author><summary type="html">主要介绍CTC的概念</summary></entry></feed>
