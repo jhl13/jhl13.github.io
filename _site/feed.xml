@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-09-17T20:56:16+08:00</updated><id>http://localhost:4000/</id><title type="html">luo_13的博客</title><subtitle>别看了，没啥好看的。</subtitle><author><name>luo_13</name></author><entry><title type="html">简介-模板与重载</title><link href="http://localhost:4000/c++%20language/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%87%8D%E8%BD%BD/" rel="alternate" type="text/html" title="简介-模板与重载" /><published>2018-09-15T00:00:00+08:00</published><updated>2018-09-15T00:00:00+08:00</updated><id>http://localhost:4000/c++%20language/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%87%8D%E8%BD%BD</id><content type="html" xml:base="http://localhost:4000/c++%20language/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%87%8D%E8%BD%BD/">&lt;h1 id=&quot;c模板函数与重载函数&quot;&gt;C++模板函数与重载函数&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-09-17T21:02:48+08:00</updated><id>http://localhost:4000/</id><title type="html">luo_13的博客</title><subtitle>别看了，没啥好看的。</subtitle><author><name>luo_13</name></author><entry><title type="html">简介-模板与重载</title><link href="http://localhost:4000/c++%20language/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%87%8D%E8%BD%BD/" rel="alternate" type="text/html" title="简介-模板与重载" /><published>2018-09-15T00:00:00+08:00</published><updated>2018-09-15T00:00:00+08:00</updated><id>http://localhost:4000/c++%20language/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%87%8D%E8%BD%BD</id><content type="html" xml:base="http://localhost:4000/c++%20language/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%87%8D%E8%BD%BD/">&lt;h1 id=&quot;c模板函数与重载函数&quot;&gt;C++模板函数与重载函数&lt;/h1&gt;
 
 &lt;h2 id=&quot;模板函数&quot;&gt;模板函数&lt;/h2&gt;
 
@@ -250,13 +250,7 @@ Neural Networks的第七章第四小节&lt;/a&gt;和&lt;a href=&quot;https://blo
 
 &lt;h1 id=&quot;cnn_lstm_ctc_hdr&quot;&gt;cnn_lstm_ctc_HDR&lt;/h1&gt;
 
-&lt;p&gt;上星期另一个主要的任务是写了一个手写数字的识别。因为是第一次完全自己写，遇到的问题比较多，花了比较多的时间。&lt;/p&gt;
-
-&lt;p&gt;目前还没有完成，我觉得还欠缺两个比较重要的东西。&lt;br /&gt;
-一个是评判机制，因为label是不定长的，而且感觉不能以单纯对错来评估结果，比如说正确的是[1234],预测是[2234],所以还在找一个比较合理的准确率计算方式。&lt;br /&gt;
-另一个是因为CTC出来的是一个概率，需要进行解码才能得出直观的结果，目前这一步还没有完成&lt;/p&gt;
-
-&lt;p&gt;另外现在的网络存在过拟合问题，应该是数据集太小的缘故。&lt;/p&gt;
+&lt;p&gt;这里写了一个手写数字的识别。问题还比较多，后面会继续完善。&lt;/p&gt;
 
 &lt;p&gt;采用的网络结构是cnn+lstm+ctc&lt;br /&gt;
 cnn使用了三层卷积网络和两层全链接层，提取出特征作为lstm的输入。&lt;/p&gt;
