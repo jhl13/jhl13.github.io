@@ -1,0 +1,597 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>递归全排列 | luo_13的博客</title>
+<meta name="description" content="利用递归函数实现全排列">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="luo_13的博客">
+<meta property="og:title" content="递归全排列">
+<meta property="og:url" content="http://localhost:4000/c++%20language/%E9%80%92%E5%BD%92%E5%85%A8%E6%8E%92%E5%88%97/">
+
+
+  <meta property="og:description" content="利用递归函数实现全排列">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2018-09-22T00:00:00+08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/c++%20language/%E9%80%92%E5%BD%92%E5%85%A8%E6%8E%92%E5%88%97/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "luo",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="luo_13的博客 Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">luo_13的博客</a>
+        <ul class="visible-links">
+                
+                
+                    <li class="masthead__menu-item">
+                        <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/"title="How to start minimal-msitakes">Quick-Start Guide</a>
+                    </li>
+                
+            
+                
+                
+                    <li class="dropdown ">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category    <i class="fa fa-caret-down fa-sm" aria-hidden="true"></i><span class="caret"></span></a>
+                        <ul class="dropdown-content">
+                            
+                                <li>
+                                    <a href="/machine-learning/"title="some posts about machine-learning">    ML</a>
+                                </li>
+                            
+                                <li>
+                                    <a href="/C++/"title="some posts about C++ algorithm">    C++</a>
+                                </li>
+                            
+                        </ul>
+                    </li>
+                
+            
+        </ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">切换菜单</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/images/chen.jpeg" alt="luo_13" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">luo_13</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        stupid guy
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">关注</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">CN-GZ</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/jhl13"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+          
+        
+          
+            <li><a href="jiehaoluo13@gmail.com"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> jiehaoluo@gmail.com</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="递归全排列">
+    <meta itemprop="description" content="利用递归函数实现全排列">
+    <meta itemprop="datePublished" content="September 22, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">递归全排列
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  9 分钟读完
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="递归全排列">递归全排列</h1>
+
+<p>先看代码</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">Perm</span><span class="p">(</span><span class="kt">int</span> <span class="n">list</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">k</span><span class="p">,</span> <span class="kt">int</span> <span class="n">m</span><span class="p">)</span> 
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="n">m</span><span class="p">)</span> 
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="n">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">();</span>
+    <span class="p">}</span> 
+    <span class="k">else</span> 
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> 
+        <span class="p">{</span>
+            <span class="c1">// 从固定的数后第一个依次交换
+</span>            <span class="n">Swap</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+            <span class="n">Perm</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">);</span>
+            <span class="c1">// 这组递归完成之后需要交换回来
+</span>            <span class="n">Swap</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">Swap</span><span class="p">(</span><span class="kt">int</span><span class="p">[]</span> <span class="n">list</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> 
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="递归全排列的思路">递归全排列的思路</h2>
+
+<p>拿list={1234}做一个例子</p>
+
+<ul>
+  <li>list(0)与list(0)交换 -&gt; list{1234} -&gt; 固定第一位得到 1+list{234}</li>
+  <li>list(1)与list(1)交换 -&gt; list{1234} -&gt; 固定一二位得到 12+list{34}</li>
+  <li>list(2)与list(2)交换 -&gt; list{1234} -&gt; 固定一二三位得到 123+list{4}</li>
+  <li>已是最后一位，输出 1234</li>
+  <li>将list(2)与list(2)复位 -&gt; list{1234}</li>
+  <li>list(2)与list(3)交换 -&gt; list{1243} -&gt; 固定一二三位得到 124+list{3}</li>
+  <li>已是最后一位，输出 1243</li>
+  <li>将list(2)与list(3)复位 -&gt; list{1234}</li>
+  <li>
+    <p>将list(1)与list(1)复位 -&gt; list{1234}</p>
+  </li>
+  <li>list(1)与list(2)交换 -&gt; list{1324} -&gt; 固定一二位得到 13+list{24}</li>
+  <li>list(2)与list(2)交换 -&gt; list{1324} -&gt; 固定一二三位得到 132+list{4}</li>
+  <li>已是最后一位，输出 1324</li>
+  <li>将list(2)与list(2)复位 -&gt; list{1324}</li>
+  <li>list(2)与list(3)交换 -&gt; list{1342} -&gt; 固定一二三位得到 134+list{2}</li>
+  <li>已是最后一位，输出 1342</li>
+  <li>将list(2)与list(3)复位 -&gt; list{1324}</li>
+  <li>
+    <p>将list(1)与list(2)复位 -&gt; list{1234}</p>
+  </li>
+  <li>list(1)与list(3)交换 -&gt; list{1432} -&gt; 固定一二位得到 14+list{32}</li>
+  <li>list(2)与list(2)交换 -&gt; list{1432} -&gt; 固定一二三位得到 143+list{2}</li>
+  <li>已是最后一位，输出 1432</li>
+  <li>将list(2)与list(2)复位 -&gt; list{1432}</li>
+  <li>list(2)与list(3)交换 -&gt; list{1423} -&gt; 固定一二三位得到 142+list{3}</li>
+  <li>已是最后一位，输出 1423</li>
+  <li>将list(2)与list(3)复位 -&gt; list{1432}</li>
+  <li>将list(1)与list(3)复位 -&gt; list{1234}</li>
+  <li>将list(0)与list(0)复位 -&gt; list{1234}</li>
+</ul>
+
+<hr />
+
+<p>上面列出了固定第一个数 {1} 时的全排列，后面的{2}、{3}、{4}可以以此类推</p>
+
+<p><img src="/images/递归全排列/1.png" alt="递归全排列" />
+<a href="https://www.cnblogs.com/zyoung/p/6764371.html">图片来源</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 分类: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#c-language" class="page__taxonomy-item" rel="tag">C++ language</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 更新时间:</strong> <time datetime="2018-09-22T00:00:00+08:00">September 22, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">分享</h4>
+  
+
+  <!--<a href="https://twitter.com/intent/tweet?text=%E9%80%92%E5%BD%92%E5%85%A8%E6%8E%92%E5%88%97%20http%3A%2F%2Flocalhost%3A4000%2Fc%2B%2B%2520language%2F%25E9%2580%2592%25E5%25BD%2592%25E5%2585%25A8%25E6%258E%2592%25E5%2588%2597%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="分享 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>-->
+
+  <!--<a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fc%2B%2B%2520language%2F%25E9%2580%2592%25E5%25BD%2592%25E5%2585%25A8%25E6%258E%2592%25E5%2588%2597%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="分享 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>-->
+
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fc%2B%2B%2520language%2F%25E9%2580%2592%25E5%25BD%2592%25E5%2585%25A8%25E6%258E%2592%25E5%2588%2597%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="分享 Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <!--<a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fc%2B%2B%2520language%2F%25E9%2580%2592%25E5%25BD%2592%25E5%2585%25A8%25E6%258E%2592%25E5%2588%2597%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="分享 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>-->
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/c++%20language/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%87%8D%E8%BD%BD/" class="pagination--pager" title="简介-模板与重载
+">向前</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">向后</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">猜您还喜欢</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/c++%20language/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%87%8D%E8%BD%BD/" rel="permalink">简介-模板与重载
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 分钟读完
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">模板函数与重载函数
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/ml/%E7%AE%80%E4%BB%8B-RNN/" rel="permalink">简介-RNN
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  2 分钟读完
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">主要介绍vanilla RNN与LSTM
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/ml/%E7%AE%80%E4%BB%8B-CTC/" rel="permalink">简介-CTC
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 分钟读完
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">主要介绍CTC的概念
+</p>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>关注:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/jhl13"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 luo. 技术来自于 <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

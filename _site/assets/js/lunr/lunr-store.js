@@ -13,4 +13,9 @@ var store = [{
         "excerpt":"C++模板函数与重载函数 模板函数 可以理解为一段通用代码形参类型由编译器决定下述类型要相同，不同编译器会报错 template&lt;class T&gt;T function(T a, T b, T c){ return a + b * c;}更通用的版本 template&lt;class Ta, class Tb, class Tc&gt;Ta function(Ta a, Tb b, Tc c){ return a + b * c;}重载函数 定义多个同名函数的机制称为函数重载 void function(int a, int b){ a = b;}void function(int a, int b, int c){...","categories": ["C++ language"],
         "tags": [],
         "url": "http://localhost:4000/c++%20language/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%87%8D%E8%BD%BD/",
+        "teaser":null},{
+        "title": "递归全排列",
+        "excerpt":"递归全排列 先看代码 void Perm(int list[], int k, int m) { if (k == m) { for (int i = 0; i &lt;= m; i++) System.out.print(list[i]); System.out.println(); } else { for (int i = k; i &lt;= m; i++) { // 从固定的数后第一个依次交换 Swap(list, k, i); Perm(list, k + 1, m); //...","categories": ["C++ language"],
+        "tags": [],
+        "url": "http://localhost:4000/c++%20language/%E9%80%92%E5%BD%92%E5%85%A8%E6%8E%92%E5%88%97/",
         "teaser":null}]

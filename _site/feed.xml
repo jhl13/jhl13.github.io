@@ -1,4 +1,79 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-09-17T21:02:48+08:00</updated><id>http://localhost:4000/</id><title type="html">luo_13的博客</title><subtitle>别看了，没啥好看的。</subtitle><author><name>luo_13</name></author><entry><title type="html">简介-模板与重载</title><link href="http://localhost:4000/c++%20language/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%87%8D%E8%BD%BD/" rel="alternate" type="text/html" title="简介-模板与重载" /><published>2018-09-15T00:00:00+08:00</published><updated>2018-09-15T00:00:00+08:00</updated><id>http://localhost:4000/c++%20language/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%87%8D%E8%BD%BD</id><content type="html" xml:base="http://localhost:4000/c++%20language/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%87%8D%E8%BD%BD/">&lt;h1 id=&quot;c模板函数与重载函数&quot;&gt;C++模板函数与重载函数&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-09-22T12:41:06+08:00</updated><id>http://localhost:4000/</id><title type="html">luo_13的博客</title><subtitle>别看了，没啥好看的。</subtitle><author><name>luo_13</name></author><entry><title type="html">递归全排列</title><link href="http://localhost:4000/c++%20language/%E9%80%92%E5%BD%92%E5%85%A8%E6%8E%92%E5%88%97/" rel="alternate" type="text/html" title="递归全排列" /><published>2018-09-22T00:00:00+08:00</published><updated>2018-09-22T00:00:00+08:00</updated><id>http://localhost:4000/c++%20language/%E9%80%92%E5%BD%92%E5%85%A8%E6%8E%92%E5%88%97</id><content type="html" xml:base="http://localhost:4000/c++%20language/%E9%80%92%E5%BD%92%E5%85%A8%E6%8E%92%E5%88%97/">&lt;h1 id=&quot;递归全排列&quot;&gt;递归全排列&lt;/h1&gt;
+
+&lt;p&gt;先看代码&lt;/p&gt;
+
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Perm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; 
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// 从固定的数后第一个依次交换
+&lt;/span&gt;            &lt;span class=&quot;n&quot;&gt;Swap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;Perm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// 这组递归完成之后需要交换回来
+&lt;/span&gt;            &lt;span class=&quot;n&quot;&gt;Swap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Swap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;递归全排列的思路&quot;&gt;递归全排列的思路&lt;/h2&gt;
+
+&lt;p&gt;拿list={1234}做一个例子&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;list(0)与list(0)交换 -&amp;gt; list{1234} -&amp;gt; 固定第一位得到 1+list{234}&lt;/li&gt;
+  &lt;li&gt;list(1)与list(1)交换 -&amp;gt; list{1234} -&amp;gt; 固定一二位得到 12+list{34}&lt;/li&gt;
+  &lt;li&gt;list(2)与list(2)交换 -&amp;gt; list{1234} -&amp;gt; 固定一二三位得到 123+list{4}&lt;/li&gt;
+  &lt;li&gt;已是最后一位，输出 1234&lt;/li&gt;
+  &lt;li&gt;将list(2)与list(2)复位 -&amp;gt; list{1234}&lt;/li&gt;
+  &lt;li&gt;list(2)与list(3)交换 -&amp;gt; list{1243} -&amp;gt; 固定一二三位得到 124+list{3}&lt;/li&gt;
+  &lt;li&gt;已是最后一位，输出 1243&lt;/li&gt;
+  &lt;li&gt;将list(2)与list(3)复位 -&amp;gt; list{1234}&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;将list(1)与list(1)复位 -&amp;gt; list{1234}&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;list(1)与list(2)交换 -&amp;gt; list{1324} -&amp;gt; 固定一二位得到 13+list{24}&lt;/li&gt;
+  &lt;li&gt;list(2)与list(2)交换 -&amp;gt; list{1324} -&amp;gt; 固定一二三位得到 132+list{4}&lt;/li&gt;
+  &lt;li&gt;已是最后一位，输出 1324&lt;/li&gt;
+  &lt;li&gt;将list(2)与list(2)复位 -&amp;gt; list{1324}&lt;/li&gt;
+  &lt;li&gt;list(2)与list(3)交换 -&amp;gt; list{1342} -&amp;gt; 固定一二三位得到 134+list{2}&lt;/li&gt;
+  &lt;li&gt;已是最后一位，输出 1342&lt;/li&gt;
+  &lt;li&gt;将list(2)与list(3)复位 -&amp;gt; list{1324}&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;将list(1)与list(2)复位 -&amp;gt; list{1234}&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;list(1)与list(3)交换 -&amp;gt; list{1432} -&amp;gt; 固定一二位得到 14+list{32}&lt;/li&gt;
+  &lt;li&gt;list(2)与list(2)交换 -&amp;gt; list{1432} -&amp;gt; 固定一二三位得到 143+list{2}&lt;/li&gt;
+  &lt;li&gt;已是最后一位，输出 1432&lt;/li&gt;
+  &lt;li&gt;将list(2)与list(2)复位 -&amp;gt; list{1432}&lt;/li&gt;
+  &lt;li&gt;list(2)与list(3)交换 -&amp;gt; list{1423} -&amp;gt; 固定一二三位得到 142+list{3}&lt;/li&gt;
+  &lt;li&gt;已是最后一位，输出 1423&lt;/li&gt;
+  &lt;li&gt;将list(2)与list(3)复位 -&amp;gt; list{1432}&lt;/li&gt;
+  &lt;li&gt;将list(1)与list(3)复位 -&amp;gt; list{1234}&lt;/li&gt;
+  &lt;li&gt;将list(0)与list(0)复位 -&amp;gt; list{1234}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;上面列出了固定第一个数 {1} 时的全排列，后面的{2}、{3}、{4}可以以此类推&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/递归全排列/1.png&quot; alt=&quot;递归全排列&quot; /&gt;
+&lt;a href=&quot;https://www.cnblogs.com/zyoung/p/6764371.html&quot;&gt;图片来源&lt;/a&gt;&lt;/p&gt;</content><author><name>luo_13</name></author><category term="C++ language" /><summary type="html">利用递归函数实现全排列</summary></entry><entry><title type="html">简介-模板与重载</title><link href="http://localhost:4000/c++%20language/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%87%8D%E8%BD%BD/" rel="alternate" type="text/html" title="简介-模板与重载" /><published>2018-09-15T00:00:00+08:00</published><updated>2018-09-15T00:00:00+08:00</updated><id>http://localhost:4000/c++%20language/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%87%8D%E8%BD%BD</id><content type="html" xml:base="http://localhost:4000/c++%20language/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%87%8D%E8%BD%BD/">&lt;h1 id=&quot;c模板函数与重载函数&quot;&gt;C++模板函数与重载函数&lt;/h1&gt;
 
 &lt;h2 id=&quot;模板函数&quot;&gt;模板函数&lt;/h2&gt;
 
