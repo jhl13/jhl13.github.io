@@ -18,4 +18,9 @@ var store = [{
         "excerpt":"递归全排列 先看代码 void Perm(int list[], int k, int m) { if (k == m) { for (int i = 0; i &lt;= m; i++) System.out.print(list[i]); System.out.println(); } else { for (int i = k; i &lt;= m; i++) { // 从固定的数后第一个依次交换 Swap(list, k, i); Perm(list, k + 1, m); //...","categories": ["C++ language"],
         "tags": [],
         "url": "http://localhost:4000/c++%20language/%E9%80%92%E5%BD%92%E5%85%A8%E6%8E%92%E5%88%97/",
+        "teaser":null},{
+        "title": "MTCNN & FaceNet",
+        "excerpt":"#简介这里主要是对两篇论文的理解1、《Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks》2、《FaceNet: A Unified Embedding for Face Recognition and Clustering》 MTCNN mtcnn同时完成了人脸检测（recognition）以及人脸对齐（alignment）的任务。 创新的地方:1. 使用了三层联级结构2. 考虑到face recognition和alignment的固有联系同时进行face recognition和alignment3. 提供了一种名为Online Hard sample mining的训练方法，且在实际中效果不错 mtcnn分为三层，proposal net（P-Net）、refinement net（R-Net）、output net（O-Net） P-Net用于生成候选窗口，R-Net用于去除错误的候选窗口，O-Net的效果与R-Net相识，但条件更加严格，用于最后输出bounding box以及facial landmarks在P-Net和R-Net中会用NMS（non-maximum suppression）的方式去合并高重合度的候选窗口 NMS（non-maximum suppression）是一个迭代-遍历-消除的过程（1）将所有框的得分排序，选中最高分及其对应的框（2）遍历其余的框，如果和当前最高分框的重叠面积(IOU)大于一定阈值，我们就将框删除（3）从未处理的框中继续选一个得分最高的，重复上述过程。参考资料还没去看源代码，但是感觉应该不会只是单纯的删除候选窗口，以前有看过使用合并的。 联级网络结构 网络结构 作者采用PRelu作为conv和fc层的激活函数，PRelu与Relu的区别在于在负半轴PRelu不饱和，对于这两个激活函数应该没有优劣的说法，但是有论文表明使用PRelu在分类问题上会有一点提升 训练过程 分成了三个部分 face/non-face classificationbounding box regressionfacial landmark localization...","categories": ["ML"],
+        "tags": [],
+        "url": "http://localhost:4000/ml/MTCNN&FaceNet/",
         "teaser":null}]
