@@ -9,38 +9,38 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>简介-RNN | luo_13的博客</title>
-<meta name="description" content="主要介绍vanilla RNN与LSTM">
+<!-- begin _includes/seo.html --><title>softmax &amp; SVM | luo_13的博客</title>
+<meta name="description" content="主要介绍softmax &amp; SVM">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:site_name" content="luo_13的博客">
-<meta property="og:title" content="简介-RNN">
-<meta property="og:url" content="http://localhost:4000/ml/%E7%AE%80%E4%BB%8B-RNN/">
+<meta property="og:title" content="softmax &amp; SVM">
+<meta property="og:url" content="http://localhost:4000/ml/softmax&SVM/">
 
 
-  <meta property="og:description" content="主要介绍vanilla RNN与LSTM">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2018-09-15T00:00:00+08:00">
+  <meta property="og:description" content="主要介绍softmax &amp; SVM">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2018-10-14T00:00:00+08:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/ml/%E7%AE%80%E4%BB%8B-RNN/">
+
+<link rel="canonical" href="http://localhost:4000/ml/softmax&SVM/">
 
 
 
@@ -284,15 +284,15 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="简介-RNN">
-    <meta itemprop="description" content="主要介绍vanilla RNN与LSTM">
-    <meta itemprop="datePublished" content="September 15, 2018">
+    <meta itemprop="headline" content="softmax &amp; SVM">
+    <meta itemprop="description" content="主要介绍softmax &amp; SVM">
+    <meta itemprop="datePublished" content="October 14, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">简介-RNN
+          <h1 id="page-title" class="page__title" itemprop="headline">softmax &amp; SVM
 </h1>
           
             <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
@@ -308,93 +308,72 @@
 
       <section class="page__content" itemprop="text">
         
-        <h1 id="vanilla-rnn">vanilla RNN</h1>
+        <h1 id="softmax--svm">softmax &amp; SVM</h1>
 
-<hr />
+<p>因为这几天接触得比较多关于SVM和softmax的内容，所以去复习了一下。</p>
 
-<p>RNN最大的特点在于同一隐藏层的各单元按照序列链接。</p>
+<p>softmax主要是重新了解了一下他的定义以及关于softmax的几种优化算法</p>
+
+<h2 id="original-softmax">original softmax</h2>
+
+<p>softmax可以看成是logistic回归模型在多分类上的推广</p>
+
+<p>以前学习softmax比较疑惑的一点是，他的loss function是怎么得出来的，这次复习的时候，从吴恩达机器学习关于logistic回归模型的cost函数找到了结果，softmax的损失函数是根据最大似然估计推导得到的，其实虽然说的是logistic回归模型，但是根据这个可以很容易推广导softmax的交叉熵损失函数当中。找了一篇<a href="https://blog.csdn.net/ligang_csdn/article/details/53838743">博客</a>，具体的推导过程在3.2节。</p>
+
+<p>另外还重新看了一遍<a href="http://ufldl.stanford.edu/wiki/index.php/Softmax%E5%9B%9E%E5%BD%92">ufldl的softmax部分 </a>
+对softmax的参数冗余和权重衰减有了一些新的看法。</p>
+
+<p>softmax的参数冗余会造成采用牛顿法优化代价函数时遇到数值计算的问题，具体原因是Hessian矩阵不可逆，而加入权重衰减就是为了惩罚过大的参数值，使代价函数变成一个严格的凸函数，使Hessian矩阵可逆。</p>
+
+<p><a href="https://zh.wikipedia.org/wiki/%E5%87%B8%E5%87%BD%E6%95%B0">凸函数的定义</a></p>
+
+<p>严格凸函数的定义:</p>
 <div style="text-align: center">
-<img src="/images/RNN/1.png" /> 
-</div>
-<p>通过这个图可以知道，RNN比CNN更适合处理具有一定序列的输入，因为RNN的结构决定了前面的输入必然能影响到后面的输出。这使得RNN在NLP这一领域获得了很大的成功。</p>
-
-<p>在学习RNN的过程过程中反向传播公式的推导应该是比较难的一个部分，因为像是CNN的反向传播只有一个方向，就是上一层传递给下一层，而RNN除了沿上下层的传播还有沿时间序列方向的传播。</p>
-
-<p>最终推导结果：<br />
-c为隐藏层到输出的bias，b为输入到隐藏层的bais，推导过程比较长，以下这篇文章写得比较清晰<a href="https://zybuluo.com/hanbingtao/note/541458">循环神经网络</a>以及<a href="http://www.deeplearningbook.org/contents/rnn.html">deeplearningbook</a>写得比较清晰</p>
-<div style="text-align: center">
-<img src="/images/RNN/2.png" /> 
-</div>
-<p>在编程过程中发现了一个比较容易出错的地方，那就是反向传播过程要注意残差在上下层之间传递，因为参考内容的推导过程主要是以一个隐藏层作为例子，所以写代码的过程要注意这一点，如下图，残差3要往4和5的方向传递，但要注意的是，残差3是有1,2两个方向的残差累加而成的。</p>
-<div style="text-align: center">
-<img src="/images/RNN/3.png" /> 
-</div>
-
-<p>另一个需要注意的地方是，在某些任务（不是全部）中RNN的训练和测试是很不一样的，这里举的例子是cs231n的image captioning 问题。</p>
-
-<p>训练时因为知道正确的label，所以可以将ground-truth直接当成input输入到RNN当中，但是训练的时候，因为不知道ground-truth，所以要将前一个输出要当成后一个的输入。<br />
-拿上面的图为例就是用x(t – 1)预测出o(t-1),然后将o(t-1)当成x(t)再次输入到网络。</p>
-
-<p>采用这种方式是因为cs231n的assignment3将图像的特征当成input输入到网络时只会预测出结果中的第一个词。<br />
-采用的结构感觉是在one to many上做了一些变动。</p>
-<div style="text-align: center">
-<img src="/images/RNN/4.png" /> 
+<img src="/images/softmax&amp;SVM/1.png" /> 
 </div>
 
-<h2 id="vanilla-rnn的缺点">Vanilla RNN的缺点</h2>
-<p>训练过程中容易发生梯度爆炸或梯度消失，产生的原因在参考资料<a href="https://zybuluo.com/hanbingtao/note/541458">循环神经网络</a>中有详细说明。</p>
-
-<p>梯度爆炸可以简单用阈值方式解决。<br />
-而解决梯度消失也有挺多的方式，参考资料<a href="https://zybuluo.com/hanbingtao/note/541458">循环神经网络</a>中提到了三种常见的方式，我觉得进行batch normalization也应该可以缓解这种现象。</p>
-
 <div style="text-align: center">
-<img src="/images/RNN/5.png" /> 
+<img src="/images/softmax&amp;SVM/2.png" /> 
 </div>
 
-<h1 id="lstm">LSTM</h1>
-
-<hr />
-
-<p>如sigmoid函数，如果输入的模过大就会出现梯度消失的情况，LSTM为了解决这一问题加入了门和单元状态的概念，可以有效的控制前面输入对后面输出的影响。</p>
+<p>通过相似三角形的性质可以证明这一个结论</p>
 
 <div style="text-align: center">
-<img src="/images/RNN/6.png" /> 
+<img src="/images/softmax&amp;SVM/3.jpg" /> 
 </div>
 
-<p>LSTM添加了三个门，遗忘门（forget gate）用以决定上一时刻的单元状态有多少能保留下来，输入门（input gate）用来决定输入状态有多少能进入到单元状态，输出门（output gate）用来决定单元状态有多少能输出到output</p>
+<h2 id="介绍两种softmax-loss的优化算法">介绍两种softmax loss的优化算法</h2>
+
+<p>一个是L-softmax loss<br />
+<a href="https://blog.csdn.net/u014380165/article/details/76864572">Large-Margin softmax loss</a></p>
+
+<p>另一个是A-softmax loss<br />
+<a href="https://blog.csdn.net/u014380165/article/details/76946380">angular softmax loss</a></p>
+
+<p>还没有深入去推导过他们，但是大概知道是怎么一回事，做的事情是将映射空间（不知道这个说法合不合适）从概率转换导角度，从而使类间距离更大，类内距离更小。</p>
 
 <div style="text-align: center">
-<img src="/images/RNN/7.png" /> 
+<img src="/images/softmax&amp;SVM/4.jpg" /> 
 </div>
+<p><br />
+A-softmax loss相比于L-softmax loss来说，多了两个条件<br />
+||W1||=||W2||=1以及b=0<br />
+使得类间、类内距离只取决与W和x的角度，而跟半径长度无关。</p>
 
-<p>c为单元状态（相当于一个容器），从左往右的三个X分别为遗忘门，输入门和输出门。<br />
-反向传播公式的推导在参考资料<a href="http://www.deeplearningbook.org/contents/rnn.html">deeplearningbook</a>和<a href="https://zybuluo.com/hanbingtao/note/581764">LSTM</a>中有很详细的过程</p>
+<p>其实我觉得师兄推荐的cosface对应论文提出LMCL也是对softmax的一种优化，只是是softmax条件更苛刻，使类间更远，类内更紧凑</p>
 
-<figure class="third">
-    <img src="/images/RNN/8-1.png" />
-    <img src="/images/RNN/8-2.png" />
-    <img src="/images/RNN/8-3.png" />
-</figure>
+<p>关于softmax的一个<a href="https://zhuanlan.zhihu.com/p/34044634">综述</a></p>
 
-<p>状态单元c并不直接输出，在反向传播计算残差的时候要格外注意这一点。</p>
+<p>关于SVM主要是从新看了一下各种内核的适用情况，资料是吴恩达coursera上的机器学习课程。</p>
 
-<p>LSTM还有很多不同的变体，比如说GRU，GRU网上资料说是LSTM最为成功的一种变体，在后面的学习中会详细的去了解。</p>
+<p>其中比较常用的是linear kernel以及gaussian kernel</p>
 
-<p>一些想法<br />
-RNN比较适合处理时序问题，之前还看过一篇博客，内容主要是在介绍RNN能做一些什么事情，里面比较有趣的是让电脑学会从左往右去看一张图片。</p>
+<ul>
+  <li>linear kernel用在特征很多，但是训练样本较少的情况。</li>
+  <li>guassian kernel用在特征很少，训练样本适中的情况。</li>
+</ul>
 
-<div style="text-align: center">
-<img src="/images/RNN/9.gif" /> 
-</div>
-
-<h1 id="ocr">OCR</h1>
-
-<hr />
-
-<p>对于text recognition有两种比较常见的方法<br />
-非端到端的OCR：需要进行预分割，特征提取，语义分析等环节，各环节之间存在一定关系<br />
-端到端OCR：无需进行预分割，且整个过程是一个整体</p>
-
+<p>如果特征很少，样本很多，应该先使用方法去增加特征数，然后使用线性内核的SVM或直接使用多个logistic regression回归函数。</p>
 
         
       </section>
@@ -424,7 +403,7 @@ RNN比较适合处理时序问题，之前还看过一篇博客，内容主要�
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 更新时间:</strong> <time datetime="2018-09-15T00:00:00+08:00">September 15, 2018</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 更新时间:</strong> <time datetime="2018-10-14T00:00:00+08:00">October 14, 2018</time></p>
         
       </footer>
 
@@ -433,25 +412,24 @@ RNN比较适合处理时序问题，之前还看过一篇博客，内容主要�
     <h4 class="page__share-title">分享</h4>
   
 
-  <!--<a href="https://twitter.com/intent/tweet?text=%E7%AE%80%E4%BB%8B-RNN%20http%3A%2F%2Flocalhost%3A4000%2Fml%2F%25E7%25AE%2580%25E4%25BB%258B-RNN%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="分享 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>-->
+  <!--<a href="https://twitter.com/intent/tweet?text=softmax+%26+SVM%20http%3A%2F%2Flocalhost%3A4000%2Fml%2Fsoftmax%26SVM%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="分享 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>-->
 
-  <!--<a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fml%2F%25E7%25AE%2580%25E4%25BB%258B-RNN%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="分享 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>-->
+  <!--<a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fml%2Fsoftmax%26SVM%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="分享 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>-->
 
-  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fml%2F%25E7%25AE%2580%25E4%25BB%258B-RNN%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="分享 Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fml%2Fsoftmax%26SVM%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="分享 Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <!--<a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fml%2F%25E7%25AE%2580%25E4%25BB%258B-RNN%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="分享 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>-->
+  <!--<a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fml%2Fsoftmax%26SVM%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="分享 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>-->
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/ml/%E7%AE%80%E4%BB%8B-CTC/" class="pagination--pager" title="简介-CTC
+      <a href="/ml/MTCNN&FaceNet/" class="pagination--pager" title="MTCNN &amp; FaceNet
 ">向前</a>
     
     
-      <a href="/c++%20language/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%87%8D%E8%BD%BD/" class="pagination--pager" title="简介-模板与重载
-">向后</a>
+      <a href="#" class="pagination--pager disabled">向后</a>
     
   </nav>
 
@@ -465,33 +443,6 @@ RNN比较适合处理时序问题，之前还看过一篇博客，内容主要�
     <div class="page__related">
       <h4 class="page__related-title">猜您还喜欢</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/ml/softmax&SVM/" rel="permalink">softmax &amp; SVM
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  2 分钟读完
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">主要介绍softmax &amp; SVM
-</p>
-  </article>
-</div>
         
           
 
@@ -539,7 +490,7 @@ RNN比较适合处理时序问题，之前还看过一篇博客，内容主要�
 
 
 
-  7 分钟读完
+  9 分钟读完
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">利用递归函数实现全排列
@@ -566,10 +517,37 @@ RNN比较适合处理时序问题，之前还看过一篇博客，内容主要�
 
 
 
-  5 分钟读完
+  4 分钟读完
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">模板函数与重载函数
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/ml/%E7%AE%80%E4%BB%8B-RNN/" rel="permalink">简介-RNN
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  2 分钟读完
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">主要介绍vanilla RNN与LSTM
 </p>
   </article>
 </div>
