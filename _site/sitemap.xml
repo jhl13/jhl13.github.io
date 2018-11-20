@@ -25,6 +25,10 @@
 <lastmod>2018-10-14T00:00:00+08:00</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/ml/%E5%B8%B8%E7%94%A8%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84/</loc>
+<lastmod>2018-11-20T00:00:00+08:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/machine-learning/</loc>
 </url>
 <url>
@@ -35,5 +39,8 @@
 </url>
 <url>
 <loc>http://localhost:4000/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/page2/</loc>
 </url>
 </urlset>

@@ -1,4 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-10-14T20:55:17+08:00</updated><id>http://localhost:4000/</id><title type="html">luo_13的博客</title><subtitle>别看了，没啥好看的。</subtitle><author><name>luo_13</name></author><entry><title type="html">softmax &amp;amp; SVM</title><link href="http://localhost:4000/ml/softmax&SVM/" rel="alternate" type="text/html" title="softmax &amp; SVM" /><published>2018-10-14T00:00:00+08:00</published><updated>2018-10-14T00:00:00+08:00</updated><id>http://localhost:4000/ml/softmax&amp;SVM</id><content type="html" xml:base="http://localhost:4000/ml/softmax&amp;SVM/">&lt;h1 id=&quot;softmax--svm&quot;&gt;softmax &amp;amp; SVM&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-11-20T11:47:40+08:00</updated><id>http://localhost:4000/</id><title type="html">luo_13的博客</title><subtitle>别看了，没啥好看的。</subtitle><author><name>luo_13</name></author><entry><title type="html">深度网络结构简介</title><link href="http://localhost:4000/ml/%E5%B8%B8%E7%94%A8%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84/" rel="alternate" type="text/html" title="深度网络结构简介" /><published>2018-11-20T00:00:00+08:00</published><updated>2018-11-20T00:00:00+08:00</updated><id>http://localhost:4000/ml/%E5%B8%B8%E7%94%A8%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84</id><content type="html" xml:base="http://localhost:4000/ml/%E5%B8%B8%E7%94%A8%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84/">&lt;h1 id=&quot;深度网络结构&quot;&gt;深度网络结构&lt;/h1&gt;
+&lt;p&gt;深度网络结构的发展是相互影响的，新网络结构往往会受以往的网络结构影响，而新的网络结构也往往会对旧网络结构进行针对性的改进。这里主要介绍学习内容里面说到的六种深度网络框架，虽不涉及反向传播的推导过程，但是对我们理解这些网络框架会有挺大的帮助。&lt;/p&gt;
+
+&lt;h2 id=&quot;alexnet&quot;&gt;AlexNet&lt;/h2&gt;
+
+&lt;div style=&quot;text-align: center&quot;&gt;
+&lt;img src=&quot;/images/常用网络结构/1.bmp&quot; /&gt; 
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;
+AlexNet应该是正式拉开深度学习热潮的一个网络结构，相比于LeNet在网络深度上有了很大的提升。如上图所示，AlexNet包括了五层卷积层和三层全连接层，图中将网络整体分成两部分是因为当时的硬件计算能力并不支持这么大的网络，现在如果使用较好的GPU就不需要担心这个问题了，可以将其合并成一个部分。&lt;/p&gt;
+
+&lt;p&gt;AlexNet在当时比较突出的地方是：1、使用了非线性激活函数：ReLU；2、为防止过拟合使用了Dropout和数据扩充；3、使用了LRN归一化。&lt;/p&gt;
+
+&lt;p&gt;值得注意的是，在后面的VGGNet中指出了，LRN归一化其实并没有明显的作用。但是在Tensorflow中仍然保存有LRN归一化的API接口，这个后面可以再深入了解一下。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://my.oschina.net/u/876354/blog/1633143&quot;&gt;参考链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;vggnet&quot;&gt;VGGNet&lt;/h2&gt;
+
+&lt;div style=&quot;text-align: center&quot;&gt;
+&lt;img src=&quot;/images/常用网络结构/2.bmp&quot; /&gt; 
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;
+这是VGGNet中实验过的网络结构，其中以VGG16和VGG19最为著名。VGGNet相比于AlexNet有着更深的网络结构，其次，VGGNet为了减少参数且增加模型的非线性化特性，使用了重叠的3X3卷积核去代替AlexNet中的5X5卷积核。（作者认为两个3x3的卷积堆叠获得的感受野大小，相当一个5X5的卷积；而3个3x3卷积的堆叠获取到的感受野相当于一个7x7的卷积）。池化核也从3X3变为2X2。还有一点是，VGGNet在测试阶段将全连接层化成了1X1的卷积层，使网络可以处理任意分辨率的图片。
+需要注意的是，现在很多应用仍使用全连接层而不是1X1的卷积层，这说明1X1的卷积层其实并不能代替全连接层，这其中的原因可以去思考一下。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://my.oschina.net/u/876354/blog/1634322&quot;&gt;参考链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;googlenet&quot;&gt;GoogLeNet&lt;/h2&gt;
+
+&lt;p&gt;GoogLeNet深度有22层，但大小却比AlexNet和VGG小很多，GoogleNet参数为500万个，AlexNet参数个数是GoogleNet的12倍，VGGNet参数又是AlexNet的3倍。究其原因是GoogLeNet对网络结构进行了大胆的尝试，将全连接改成稀疏链接，引入Inception网络结构，搭建一个稀疏性、高计算性能的网络结构。但是在实际应用上GoogLeNet在网络的最后还是加上了全连接层，比较著名的的GoogLeNet有四种V1、V2、V3、V4。为了避免梯度消失的情况，GoogLeNet采用了两个辅助分类器，以增加反向传播时的梯度。
+&lt;br /&gt;&lt;/p&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;
+&lt;img src=&quot;/images/常用网络结构/3.bmp&quot; /&gt; 
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;V1的Inception网络结构加入1x1卷积核主要是为了减少通道维度，以减少参数量和计算量。&lt;/p&gt;
+
+&lt;p&gt;V2和V3的Inception网络结构则为了进一步减少参数，都是着重进行了卷积分解，V2将5x5卷积核替换为3x3卷积核，V3将nxn的卷积核替换为1xn和nx1的卷积核。&lt;/p&gt;
+
+&lt;p&gt;V4则结合了残差网络进一步加深网络结构。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://my.oschina.net/u/876354/blog/1637819&quot;&gt;参考链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;resnet&quot;&gt;ResNet&lt;/h2&gt;
+
+&lt;p&gt;通过实验可以发现：随着网络层级的不断增加，模型精度不断得到提升，而当网络层级增加到一定的数目以后，训练精度和测试精度迅速下降，这说明当网络变得很深以后，深度网络就变得更加难以训练了。&lt;/p&gt;
+
+&lt;p&gt;ResNet的由来：假设现有一个比较浅的网络（Shallow Net）已达到了饱和的准确率，这时在它后面再加上几个恒等映射层（Identity mapping，也即y=x，输出等于输入），这样就增加了网络的深度，并且起码误差不会增加，也即更深的网络不应该带来训练集上误差的上升。而这里提到的使用恒等映射直接将前一层输出传到后面的思想，便是著名深度残差网络ResNet的灵感来源。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;
+&lt;img src=&quot;/images/常用网络结构/4.bmp&quot; /&gt; 
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;当训练时模型精度不变甚至下降时，将学习目标从最小化loss改成学习F（x）=0，使H（x）=x，也就是变成了恒等映射的学习。这样可以在保持精度的情况下继续加深网络。需要注意的时，便捷链接可能链接到两个通道数量不一样的层，所以要使用H(x)=F(x)+Wx去调整x的维数。&lt;/p&gt;
+
+&lt;p&gt;疑问：学习恒等映射应该只是保持精度不变，为什么实际上会对精度有提升作用。&lt;/p&gt;
+
+&lt;h2 id=&quot;实验内容&quot;&gt;实验内容&lt;/h2&gt;
+
+&lt;div style=&quot;text-align: center&quot;&gt;
+&lt;img src=&quot;/images/常用网络结构/5.bmp&quot; /&gt; 
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;基于Tensorflow对VGGNet进行finetune，重新训练后面三层全连接层参数，并在kaggle的猫狗训练集上进行实验，最后达到96.88%的正确率。发现一个比较有趣的事情，在二分类问题中如果对网络参数进行随机初始化，分类正确率基本在50%左右，应该与参数的随机初始化服从标准正态分布有关。&lt;/p&gt;</content><author><name>luo_13</name></author><category term="ML" /><summary type="html">介绍几种比较常用的深度网络结构</summary></entry><entry><title type="html">softmax &amp;amp; SVM</title><link href="http://localhost:4000/ml/softmax&SVM/" rel="alternate" type="text/html" title="softmax &amp; SVM" /><published>2018-10-14T00:00:00+08:00</published><updated>2018-10-14T00:00:00+08:00</updated><id>http://localhost:4000/ml/softmax&amp;SVM</id><content type="html" xml:base="http://localhost:4000/ml/softmax&amp;SVM/">&lt;h1 id=&quot;softmax--svm&quot;&gt;softmax &amp;amp; SVM&lt;/h1&gt;
 
 &lt;p&gt;因为这几天接触得比较多关于SVM和softmax的内容，所以去复习了一下。&lt;/p&gt;
 
